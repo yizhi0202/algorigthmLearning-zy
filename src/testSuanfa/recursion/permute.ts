@@ -1,28 +1,26 @@
 export {}
+
 function permute(nums: number[]): number[][] {
-    const res = [];
-    const arr = [];
     const len = nums.length;
-    const used = new Array(len); // !!! 这里使用数组记录是否使用即可
-    const dfs = (target) => {
-        if (target == 0) {
-            res.push([...arr]);
+    const used = new Array(len).fill(false); /// !!! 记录是否使用过
+    let res = [];
+    const dfs = (path) => {
+        if (path.length == len) {
+            res.push([...path]);
             return;
         }
-
         for (let i = 0; i < len; i++) {
-            if (!used[i]) {
-                arr.push(nums[i]);
-                used[i] = true;
-
-                dfs(target-1);
-
-                arr.pop();
-                used[i] = false;
+            if (used[i]) {
+                continue;
             }
+            path.push(nums[i]);
+            used[i] = true;
+            dfs(path);
+            path.pop();
+            used[i] = false;
         }
     }
-    dfs(len);
+    dfs([]);
     return res;
 };
 

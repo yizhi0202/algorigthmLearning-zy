@@ -9,7 +9,6 @@ function sub(str1, str2) {
         const num2 = idxTwo >= 0 ? parseInt(str2[idxTwo]) : 0; // !!!这里 是str2[idxTwo] 而不是str1
         const tmp = (num1 - num2 - borrow + 10) % 10;
         res += tmp.toString();
-        // res +=  String(tmp);
         borrow = (num1 - num2 - borrow) < 0 ? 1 : 0;
         idxOne--;
         idxTwo--;

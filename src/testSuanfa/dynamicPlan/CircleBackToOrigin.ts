@@ -1,13 +1,13 @@
 export {};
 
 function getCircleBackToOriginPlanNum(n: number) {
-    const len = 10; // 点数
+    const len = 10; // 点数 !!! 点数需要注意设置 和n不是一个东西
     // dp[i][j] 代表走了i步到j点的方案数
     const dp = Array.from({length: n + 1}, () => new Array(len).fill(0));
     //走0步到0点一种方案
     dp[0][0] = 1;
     for (let i = 1; i <= n; i++) {
-        for (let j = 0; j < len; j++) {
+        for (let j = 0; j < len; j++) { // !!! 从0开始遍历
             // 走i步到j点方案数分别为 走i-1步到j-1点 和 走i-1步到j+1点的位置求和
             dp[i][j] = dp[i-1][(j - 1 + len) % len] + dp[i-1][(j+1) % len];
         }
